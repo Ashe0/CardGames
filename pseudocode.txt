@@ -1,0 +1,64 @@
+imports:
+variables:
+
+pickgameloop:
+  print all of the games
+  get an input for what game
+  return what game was selected
+
+
+blackjack:
+  create new deck, randomized
+  give player 2, face up
+  give dealer 2, one face up, one down
+  ask player to either hit or stay
+  player loop:
+    if hit:
+        add another card
+      if bust:
+        game lost screen
+        go back to main screen
+      else:
+        ask again
+    if stay:
+      end loop
+  dealer loop:
+    if dealer cards < 16:
+      add dealer card
+        if bust:
+          player wins screen
+          go back to main screen
+  if playercards > dealercards
+    player wins screen
+    go back to main screen
+  elif playercards <= dealercards
+    player lost screen
+    go back to main screen
+
+gofish:
+  give player 7 cards
+  give ai 7 cards
+  playerturn  
+    get input for what card the player wants
+    if chosencard in ai cards
+      give player all of the same number cards from ai cards
+    else
+      player grabs one card from deck
+  playercheck
+  if player has 4 cards of the same number in their hand
+    player wins screen
+    go back to main menu
+  ai turn
+    random pick one card from hand to chose
+    if chosencard in player cards
+      give ai all of the same number cards from player cards
+    else
+      random pick one card from deck
+  aicheck
+  if ai has 4 cards of the same number in their hand
+    ai wins screen
+    go back to main menu
+
+slapjack
+  
+  
