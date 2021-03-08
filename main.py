@@ -1,5 +1,7 @@
 from cards import Cards
+from player import Player
 
+you = Player("You")
 
 game_list = ["Black Jack","Go Fish!"]
 def main_menu():
@@ -26,8 +28,10 @@ def main_menu():
 
 def blackjack():
   print("Blackjack")
+  you.show_hand()
 def gofish():
   print("Go Fish")
+  
 
 
 main_menu()

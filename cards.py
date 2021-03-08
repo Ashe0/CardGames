@@ -34,6 +34,11 @@ class Cards:
     #Return Card
     return card
   
+  def replace(self,x):
+    #add the card back to the deck
+    self.deck.append(x)
+    random.shuffle(self.deck)
+  
   def translate(self,x):
     #Get the Card #
     card = ""
@@ -58,6 +63,8 @@ class Cards:
       card = card + " of Diamonds"
     #Return Card
     return card
+
+  
 
   def __eq__(self,obj):
     return self.name == obj.name and int(self.size) == int(obj.size)
