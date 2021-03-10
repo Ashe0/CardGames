@@ -1,11 +1,15 @@
 class Player:
   def __init__(self,name):
     self.name = name
-    self.hand = []
+    self.hand = ["AH","","","",""]
   
-  def draw(self,deck,num):
-    for i in range(num):
-      self.hand.append(deck.draw())
+  def sort_hand(self):
+    #order = {"2":1,"3":2,"4":3,"5":4,"6":5,"7":6,"8":7,"9":8,"1":9,"J":10,"Q":11,"K":12,"A":13,}
+    #self.hand.sort(key = order x: x[0])
+    #print(self.hand)
+  
+  def add_hand(self,x):
+    self.hand.append(x)
 
   def remove(self,x):
     self.hand.remove(x)
@@ -17,23 +21,7 @@ class Player:
     for i in range(len(self.hand)):
       self.show_card(self.hand[i])
       
-  def show_card(self,x):
-    print(" _________")
-    if len(x) == 3:
-      print("|"+x[2]+"        |")
-      print("|"+x[0:2]+"       |")
-    else:
-      print("|"+x[1]+"        |")
-      print("|"+x[0]+"        |")
-    for i in range(3):
-      print("|         |")
-    if len(x) == 3:
-      print("|       "+x[0:2]+"|")
-      print("|________"+x[2]+"|")
-    else:
-      print("|        "+x[0]+"|")
-      print("|________"+x[1]+"|")
-
+  
   def get_total(self):
     total = 0
     for i in range(len(self.hand)):
