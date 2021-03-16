@@ -1,37 +1,27 @@
 from deck import Deck
 from player import Player
-class Blackjack:
-  def __init__(self, deck):
-    self.deck = deck
-  
-  def show_card(self,suit,rank):
-    print("__________")
-    print("| " + suit+"       |")
-    if rank == "T":
-      print("| 10     |")
-    else:
-      print("| "+rank+"       |")
-    for i in range(4):
-      print("|        |")
-      print("| " +rank+"       |")
-    if rank == "T":
-      print("|     10 |")
-    else:
-      print("|       "+rank+" |")
-    print("|       " + suit+" |")
-    print("|________|")
+from card import Card
+suits = ["S", "D", "C", "H"]
+ranks = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
 
+class Blackjack:
+  def __init__(self):
+    self.deck = Deck(suits,ranks)
+  
   def show_hand(self,hand,tf):
-    if tf:
+    if tf == False:
       for i in range(len(hand)):
-        self.show_card(hand[i][0],hand[i][1])
+        showcard = Card(hand[i][0],hand[i][1])
+        showcard.show_card()
     else:
-      self.show_card("X","X")
+      showcard = Card("X","X")
+      showcard.show_card()
       for i in range(len(hand)-1):
-        self.show_card(hand[i+1][0],hand[i+1][1])
+        showcard = Card(hand[i+1][0],hand[i+1][1])
+        showcard.show_card()
 
   def hit(self,hand,deck):
-    hand.append(Deck.draw(deck))
+    hand.append(self.deck.draw())
 
   def is_bust(self,hand):
     if self.get_hand_total(hand) > 21:
@@ -47,7 +37,7 @@ class Blackjack:
     total = 0
     test = 0
     for i in range(len(hand)):
-      if hand[i][1] == ("K" or "Q" or "J" or "T"):
+      if hand[i][1] in ("K","Q","J","T"):
         total += 10
       elif hand[i][1] != "A":
         total += int(hand[i][1]) 
@@ -61,45 +51,71 @@ class Blackjack:
     
     return total
   
-  def main(self,player,dealer):
-    choice = input("Are you ready to play?")
+  def main(self):
+    #Ask if ready to play
+    choice = input("Are you ready to play?\n")
+    #If they say yes
     if choice != ("n" or "N" or "no" or "No"):
-      gameloop = True
-      deck = Deck.reset_deck()
+      #Set up deck
+      self.deck.reset_deck()
+      self.deck.shuffle()
+      #set up player
       player = Player()
       dealer = Player()
+      userlist = [player,dealer]
+      for i in range(len(userlist)):
+        for q in range(2):
+          self.hit(userlist[i].hand,self.deck)
+      #Game Loop
+      gameloop = True
       while gameloop:
         #Show Hand
-        self.show_hand(player,False)
+        print("Player Hand:\n")
+        self.show_hand(player.hand,False)
         #Show Dealer Hand
-        self.show_hand(dealer,True)
+        print("--------------------\nDealer Hand:\n")
+        self.show_hand(dealer.hand,True)
         #Ask for Hit
         hitchoice = input("Hit or stay? H/S\n")
         #If hit:
         if hitchoice == "H":
-          self.hit(player.hand,deck)
+          self.hit(player.hand,self.deck)
           #is_bust:
-          if self.is_bust():
+          if self.is_bust(player.hand):
             print("BUST!")
             #End Game:
-            exit()
+            gameloop = False
+            self.main()
         #If stay:
         else:
           pass
           #Add dealer cards until dealer = or > 16
-          while self.get_hand_total(dealer.hand) > 16:
-            self.hit(dealer.hand)
+          while self.get_hand_total(dealer.hand) < 16:
+            self.hit(dealer.hand,self.deck)
           #If dealer is_bust:
-          if self.get_hand_total(dealer.hand) > 21:
+          if self.is_bust(dealer.hand):
             #Player Win
             print("Player Wins! Dealer Bust")
-            exit()
+            gameloop = False
+            self.main()
           #If dealer_total < player_total
-          if self.get_hand_total(dealer.hand) < self.get_hand_total(player.hand)
+          elif self.get_hand_total(dealer.hand) < self.get_hand_total(player.hand):
             #Player Win
-            print("Player Wins! Player hand Higher")
-          #If dealer_total >= player_total
+            print("Player Wins! Player Hand Higher")
+            gameloop = False
+            self.main()
+          #If dealer_total > player_total
+          elif self.get_hand_total(dealer.hand) > self.get_hand_total(player.hand):
             #Dealer Win
+            print("Dealer Wins! Dealer Hand Higher")
+            gameloop = False
+            self.main()
+          #If dealer_total = player_total
+          elif self.get_hand_total(dealer.hand) == self.get_hand_total(player.hand):
+            #Delaer Win
+            print("Dealer Wins! Tie")
+            gameloop = False
+            self.main()
           
         
 
@@ -108,8 +124,7 @@ class Blackjack:
 if __name__ == "__main__":
   suits = ["S", "D", "C", "H"]
   ranks = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
-  point_values = [[11, 1], 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
-  blackjack_deck = Deck(suits, ranks, point_values)
+  blackjack_deck = Deck(suits, ranks)
 
   game = Blackjack(blackjack_deck)
   game.main()
