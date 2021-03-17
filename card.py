@@ -4,7 +4,7 @@ class Card:
     self.suit = suit
 
   def show_card(self):
-    print("___________")
+    print(" _________ ")
     print("| " + self.suit+"       |")
     if self.rank == "T":
       print("| 10      |")

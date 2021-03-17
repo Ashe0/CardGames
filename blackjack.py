@@ -8,18 +8,6 @@ class Blackjack:
   def __init__(self):
     self.deck = Deck(suits,ranks)
   
-  def show_hand(self,hand,tf):
-    if tf == False:
-      for i in range(len(hand)):
-        showcard = Card(hand[i][0],hand[i][1])
-        showcard.show_card()
-    else:
-      showcard = Card("X","X")
-      showcard.show_card()
-      for i in range(len(hand)-1):
-        showcard = Card(hand[i+1][0],hand[i+1][1])
-        showcard.show_card()
-
   def hit(self,hand,deck):
     hand.append(self.deck.draw())
 
@@ -55,7 +43,7 @@ class Blackjack:
     #Ask if ready to play
     choice = input("Are you ready to play?\n")
     #If they say yes
-    if choice != ("n" or "N" or "no" or "No"):
+    if choice not in ("n","N","no","No"):
       #Set up deck
       self.deck.reset_deck()
       self.deck.shuffle()
@@ -71,10 +59,10 @@ class Blackjack:
       while gameloop:
         #Show Hand
         print("Player Hand:\n")
-        self.show_hand(player.hand,False)
+        player.show_hand(False)
         #Show Dealer Hand
         print("--------------------\nDealer Hand:\n")
-        self.show_hand(dealer.hand,True)
+        dealer.show_hand(True)
         #Ask for Hit
         hitchoice = input("Hit or stay? H/S\n")
         #If hit:
@@ -90,8 +78,12 @@ class Blackjack:
         else:
           pass
           #Add dealer cards until dealer = or > 16
+          print("-----------\nDealer Hand")
+          dealer.show_hand(False)
           while self.get_hand_total(dealer.hand) < 16:
             self.hit(dealer.hand,self.deck)
+            card = Card(dealer.hand[-1][1],dealer.hand[-1][0])
+            card.show_card()
           #If dealer is_bust:
           if self.is_bust(dealer.hand):
             #Player Win
