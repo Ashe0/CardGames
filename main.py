@@ -41,14 +41,18 @@ def blackjack():
       if hit_choice == "H":
         pass
         #Add card to player hand
-        you.add_hand(use_deck.draw())
+        x = use_deck.draw()
+        you.add_hand(x)
+        use_deck.remove(x)
+        print("------Player Cards------")
+        blackjackgame.show_play_cards(you)
         #If the card makes the player bust
         if you.isbust():
           print("Bust")
           #End round
-          main_loop = False
-        print("------Player Cards------")
-        blackjackgame.show_play_cards(you)
+          ai.clear_hand()
+          you.clear_hand()
+          main_menu()
       #elif player stays:
       else:
         #end this subloop, get totals of both players
@@ -58,6 +62,10 @@ def blackjack():
     #Give a winner
     aiscore = ai.get_total()
     youscore = you.get_total()
+    print("------Dealer Final Hand------")
+    blackjackgame.show_play_cards(ai)
+    if aiscore > 21:
+      print("------Dealer Bust------")
     if aiscore == youscore:
       print("------DRAW------")
     if aiscore > youscore:
@@ -68,4 +76,7 @@ def blackjack():
     replay = input("Do you want to play again? (y/n)\n")
     if replay == "n":
       main_loop = False
+    else:
+      you.clear_hand()
+      ai.clear_hand()
 main_menu()

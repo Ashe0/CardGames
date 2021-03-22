@@ -19,17 +19,17 @@ class Player:
     total = 0
     for i in range(len(self.hand)):
       #If card is Face/10
-      if self.hand[i][0] == ("T" or "J" or "Q" or "K"):
+      if self.hand[i][0] in ("T","J","Q","K"):
         total += 10
-      #If card is #
-      elif self.hand[i][0] == "2" or self.hand[i][0] =="3" or self.hand[i][0] == "4" or self.hand[i][0] == "5" or self.hand[i][0] == "6" or self.hand[i][0] == "7" or self.hand[i][0] == "8" or self.hand[i][0] == "9" or self.hand[i][0] =="10":
-        total += int(self.hand[i][0])
       #If card is Ace and Ace Logic
       elif self.hand[i][0] == "A":
         if total+11 > 21:
           total +=1
         else:
           total += 11
+      #If card is #
+      else:
+        total += int(self.hand[i][0])
     #Return Hand Total
     return total
 
