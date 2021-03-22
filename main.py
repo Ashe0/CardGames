@@ -1,16 +1,12 @@
 from player import Player
-from card import Card
 from deck import Deck
+from blackjack import Blackjack
+from card import Card
 
-you = Player("You")
-print(you.hand())
-you.sort_hand()
-print(you.hand())
-
-
-'''
 you = Player("You")
 ai = Player("Ai")
+game = Blackjack(2)
+
 
 def main_menu():
   #Get the game the player wants to play
@@ -20,6 +16,42 @@ def main_menu():
   blackjack()
 
 def blackjack():
+  pass
+  #Game Loop 
+  main_loop = True
+  while main_loop:
+    #Make Deck to Use
+    use_deck = Deck()
+    #Deal cards to both players
+    Blackjack.deal_cards(you,ai)
+    #Show Both of player cards,
+    Blackjack.show_play_cards(you)
+    #Hide the first dealer Card
+    Blackjack.show_dealer_cards(ai)
+    #Subloop
+    hit_loop = True
+    while hit_loop:
+      #Ask The Player Hit or Stay
+      hit_choice = input("Hit(H) or Stay(S)?\n")
+      #If the player hits:
+      if hit_choice == "H":
+        pass
+        #Add card to player hand
+        you.add_hand(use_deck.draw())
+        #If the card makes the player bust
+        if you.isbust():
+          print("Bust")
+          #End round
+        #Else:
+          #Return to the start of gameloop
+      #elif player stays:
+      else:
+        #end this subloop, get totals of both players
+        hit_loop = False
+    #Give a winner
+    #Ask if the player wants to play again 
+
+'''
   blackjack = True
   deck = Cards("Blackjack",2)
   deck.makedeck()
