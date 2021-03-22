@@ -1,7 +1,6 @@
 from player import Player
 from deck import Deck
 from blackjack import Blackjack
-from card import Card
 
 you = Player("You")
 ai = Player("Ai")
@@ -66,11 +65,11 @@ def blackjack():
     blackjackgame.show_play_cards(ai)
     if aiscore > 21:
       print("------Dealer Bust------")
-    if aiscore == youscore:
+    elif aiscore == youscore:
       print("------DRAW------")
-    if aiscore > youscore:
+    elif aiscore > youscore:
       print("------Dealer Scored Higher------")
-    if aiscore < youscore:
+    elif aiscore < youscore:
       print("------Player Scored Higher------")
     #Ask if the player wants to play again 
     replay = input("Do you want to play again? (y/n)\n")

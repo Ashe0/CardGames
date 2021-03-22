@@ -1,6 +1,4 @@
-from deck import Deck
 from card import Card
-from player import Player
 
 class Blackjack:
   def __init__(self,startcards):
