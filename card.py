@@ -1,5 +1,5 @@
 class Card:
-  def __init__(self,suit,rank,worth):
+  def __init__(self,suit,rank):
     self.suit = suit
     self.rank = rank
     self.worth = self.get_worth(self.rank)
@@ -7,10 +7,12 @@ class Card:
 
   def get_worth(self,rank):
     face_list = ["A","K","Q","J","T",]
-    if rank not in face_list:
-      worth = rank-1
+    if rank == "X":
+      worth = 0
+    elif rank not in face_list:
+      worth = int(rank)-1
     else:
-      worth = 13-face_list.index[rank]
+      worth = 13-face_list.index(rank)
     return worth
 
   def show_card(self):

@@ -16,6 +16,7 @@ class Deck:
         card = self.numbers[q]+self.suits[i]+str(self.worth[i])
         #Shuffle card into deck
         deck.append(card)
+    return deck
 
   def shuffle_deck(self):
     random.shuffle(self.cards)
