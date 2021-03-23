@@ -4,7 +4,7 @@ class Player:
     self.hand = []
   
   def sort_hand(self):
-    self.hand.sort(key = lambda x: int(x[2]))
+    self.hand.sort(key = lambda x: int(x[2]),reverse=True)
   
   def remove(self,x):
     self.hand.remove(x)

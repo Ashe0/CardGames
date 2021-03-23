@@ -28,7 +28,9 @@ class Blackjack:
     deal_loop = True
     while deal_loop:
       if dealer.get_total() < 16:
-        dealer.add_hand(deck.draw())
+        addcard = deck.draw()
+        dealer.add_hand(addcard)
+        deck.remove(addcard)
       else:
         deal_loop = False
     

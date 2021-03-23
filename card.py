@@ -6,9 +6,9 @@ class Card:
     self.fullcard = self.rank+self.suit
 
   def get_worth(self,rank):
-    face_list = ["A","K","Q","J","T",]
+    face_list = ["A","K","Q","J","T"]
     if rank == "X":
-      worth = 0
+      worth = 14
     elif rank not in face_list:
       worth = int(rank)-1
     else:
