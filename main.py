@@ -45,9 +45,7 @@ def blackjack():
       if hit_choice == "H":
         pass
         #Add card to player hand
-        x = use_deck.draw()
-        you.add_hand(x)
-        use_deck.remove(x)
+        you.add_hand(use_deck.draw())
         you.sort_hand()
         print("------Player Cards------")
         blackjackgame.show_play_cards(you)

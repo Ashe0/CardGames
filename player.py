@@ -4,7 +4,7 @@ class Player:
     self.hand = []
   
   def sort_hand(self):
-    self.hand.sort(key = lambda x: int(x[2]),reverse=True)
+    self.hand.sort(key=lambda x: x.worth,reverse = True)
   
   def remove(self,x):
     self.hand.remove(x)
@@ -19,17 +19,17 @@ class Player:
     total = 0
     for i in range(len(self.hand)):
       #If card is Face/10
-      if self.hand[i][0] in ("T","J","Q","K"):
+      if self.hand[i].rank in ("T","J","Q","K"):
         total += 10
       #If card is Ace and Ace Logic
-      elif self.hand[i][0] == "A":
+      elif self.hand[i].rank == "A":
         if total+11 > 21:
           total +=1
         else:
           total += 11
       #If card is #
       else:
-        total += int(self.hand[i][0])
+        total += int(self.hand[i].rank)
     #Return Hand Total
     return total
 

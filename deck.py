@@ -15,16 +15,17 @@ class Deck:
       for q in range(len(self.numbers)):
         #Make card
         newcard = Card(self.suits[i],self.numbers[q])
-        cardstr = str(newcard.rank) + newcard.suit + str(newcard.worth)
         #Shuffle card into deck
-        deck.append(cardstr)
+        deck.append(newcard)
     return deck
 
   def shuffle_deck(self):
     random.shuffle(self.cards)
 
   def draw(self):
-    return self.cards[0] 
+    returncard = self.cards[0]
+    self.cards.pop(0)
+    return returncard
 
   def remove(self,x):
     self.cards.remove(x)

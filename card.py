@@ -16,22 +16,22 @@ class Card:
     return worth
 
   def show_card(self):
-    x = self.fullcard
+    
     print(" _________")
-    if x[0] == "T":
-      print("|"+x[1]+"        |")
+    if self.rank == "T":
+      print("|"+self.suit+"        |")
       print("|10       |")
       for i in range(3):
         print("|         |")
       print("|       10|")
-      print("|________"+x[1]+"|")
+      print("|________"+self.suit+"|")
     else:
-      print("|"+x[1]+"        |")
-      print("|"+x[0]+"        |")
+      print("|"+self.suit+"        |")
+      print("|"+self.rank+"        |")
       for i in range(3):
         print("|         |")
-      print("|        "+x[0]+"|")
-      print("|________"+x[1]+"|")
+      print("|        "+self.rank+"|")
+      print("|________"+self.suit+"|")
 
   def __eq__(self,obj):
     return self.size == obj.size and self.rank == obj.rank
