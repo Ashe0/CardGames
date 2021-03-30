@@ -16,7 +16,6 @@ class Card:
     return worth
 
   def show_card(self):
-    
     print(" _________")
     if self.rank == "T":
       print("|"+self.suit+"        |")

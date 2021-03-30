@@ -17,19 +17,23 @@ class Player:
 
   def get_total(self):
     total = 0
+    acecount = 0
     for i in range(len(self.hand)):
       #If card is Face/10
       if self.hand[i].rank in ("T","J","Q","K"):
         total += 10
-      #If card is Ace and Ace Logic
+      #If card is Ace
       elif self.hand[i].rank == "A":
-        if total+11 > 21:
-          total +=1
-        else:
-          total += 11
+        acecount += 1
       #If card is #
       else:
         total += int(self.hand[i].rank)
+    #Get ace 
+    for i in range(acecount):
+      if total+11 > 21:
+        total +=1
+      else:
+        total += 11
     #Return Hand Total
     return total
 
